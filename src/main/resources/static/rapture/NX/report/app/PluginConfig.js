@@ -16,6 +16,6 @@ Ext.define('NX.report.app.PluginConfig', {
           return NX.app.Application
               .bundleActive('org.sonatype.nexus.plugins.nexus-report-plugin');
         }
-      }, 'NX.coreui.controller.FeatureGroups'
+      }, 'NX.report.controller.FeatureGroups'
   ]
 });
