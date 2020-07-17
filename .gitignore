@@ -2,3 +2,7 @@
 /.project
 /.settings/
 /target/
+/node_modules/
+/dist/
+/yarn-error.log
+/junit.xml
