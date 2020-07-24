@@ -1,4 +1,4 @@
-package fr.edf.nexus.plugins.report.internal;
+package org.sonatype.nexus.plugins.report.internal;
 
 import static java.util.Arrays.asList;
 

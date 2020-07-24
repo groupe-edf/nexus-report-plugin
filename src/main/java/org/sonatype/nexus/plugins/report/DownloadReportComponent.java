@@ -1,4 +1,4 @@
-package fr.edf.nexus.plugins.report;
+package org.sonatype.nexus.plugins.report;
 
 import java.util.HashMap;
 import java.util.Map;

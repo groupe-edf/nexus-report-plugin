@@ -1,4 +1,4 @@
-package fr.edf.nexus.plugins.report.internal;
+package org.sonatype.nexus.plugins.report.internal;
 
 import static com.google.common.net.HttpHeaders.CONTENT_DISPOSITION;
 import static com.google.common.net.HttpHeaders.CONTENT_LENGTH;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -31,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Path(DownloadReport.RESOURCE_PATH)
 public class DownloadReport extends ComponentSupport implements Resource {
 
-    public static final String RESOURCE_PATH = "internal/report/download";
+    public static final String RESOURCE_PATH = "internal/ui/report";
 
     private DownloadService downloadService;
     private DownloadReportService downloadReportService;
@@ -49,11 +50,11 @@ public class DownloadReport extends ComponentSupport implements Resource {
     @ExceptionMetered
     @Validate
     @GET
-    @Path("{user}")
+    @Path("/report/{userId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.MULTIPART_FORM_DATA)
-    @RequiresPermissions("nexus:component:read")
-    public Response getReport(@Context final HttpServletRequest request) {
+//    @RequiresPermissions("nexus:*")
+    public Response getReport(@PathParam("userId") final String userId, @Context final HttpServletRequest request) {
         String fileName = downloadReportService.getFileName();
         try {
             Download report = downloadReportService.downloadReport(request);
