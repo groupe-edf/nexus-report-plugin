@@ -15,7 +15,7 @@ import com.softwarementors.extjs.djn.config.annotations.DirectAction;
 @Named
 @Singleton
 @DirectAction(action = "report_Download")
-public class DownloadReportComponent extends DirectComponentSupport implements StateContributor {
+public class ReportComponent extends DirectComponentSupport implements StateContributor {
     
     @Inject
     ReportConfiguration configuration;
