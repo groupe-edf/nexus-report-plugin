@@ -17,6 +17,9 @@ export default {
     ACTIONS: {
       downloadReport: 'Download Report',
       cancel: 'Cancel'
+    },
+    LABELS: {
+      fileName: 'File Name'
     }
   }
 };
