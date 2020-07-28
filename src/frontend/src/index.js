@@ -15,7 +15,7 @@ window.plugins.push({
       iconCls: 'x-fa fa-user',
       visibility: {
         bundle: 'org.sonatype.nexus.plugins.nexus-report-plugin',
-        permissions: ['nexus:privileges:read']
+        permissions: ['nexus:report:export']
       }
     }
   ]

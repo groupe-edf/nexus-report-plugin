@@ -6,13 +6,12 @@ import static com.google.common.net.HttpHeaders.CONTENT_LENGTH;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -29,19 +28,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Named
 @Singleton
-@Path(DownloadReport.RESOURCE_PATH)
-public class DownloadReport extends ComponentSupport implements Resource {
+@Path(ReportResource.RESOURCE_PATH)
+public class ReportResource extends ComponentSupport implements Resource {
 
     public static final String RESOURCE_PATH = "internal/ui/report";
 
-    private DownloadService downloadService;
-    private DownloadReportService downloadReportService;
+    private ReportService downloadReportService;
     private ObjectMapper objectMapper;
 
     @Inject
-    public DownloadReport(final DownloadService downloadService, final DownloadReportService downloadReportService,
+    public ReportResource(final DownloadService downloadService, final ReportService downloadReportService,
             final ObjectMapper objectMapper) {
-        this.downloadService = downloadService;
         this.downloadReportService = downloadReportService;
         this.objectMapper = objectMapper;
     }
@@ -49,15 +46,15 @@ public class DownloadReport extends ComponentSupport implements Resource {
     @Timed
     @ExceptionMetered
     @Validate
-    @GET
-    @Path("/report/{userId}")
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.MULTIPART_FORM_DATA)
-//    @RequiresPermissions("nexus:*")
-    public Response getReport(@PathParam("userId") final String userId, @Context final HttpServletRequest request) {
-        String fileName = downloadReportService.getFileName();
+    @RequiresPermissions("nexus:report:export")
+    public Response downloadReport(@NotNull @Valid final ReportXO reportXO) {
+        String fileName = reportXO.getFileName();
+        log.info("Report name : {}", fileName);
         try {
-            Download report = downloadReportService.downloadReport(request);
+            Download report = downloadReportService.downloadReport(reportXO);
             return Response.ok(report.getBytes())
                     .header(CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
                     .header(CONTENT_LENGTH, report.getLength()).build();
