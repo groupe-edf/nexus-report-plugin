@@ -7,9 +7,9 @@ import { Button, ContentBody, Checkbox, Textfield, Select, FieldWrapper, Section
 export default function DownloadReport() {
   const [downloadReport, setDownloadReport] = useState({
     enabled: false,
-    fileName: ''
+    repositoryName: ''
   });
-  const {enabled, fileName} = downloadReport;
+  const repositoryName = 'test';
   const [isLoading, setIsLoading] = useState(true);
   
   const handleInputChange = (event) => {
@@ -21,24 +21,28 @@ export default function DownloadReport() {
       [fileName]: value
     });
   };
+
+  const handleReport = () => {
+      Axios.post('/service/rest/internal/ui/report/' + repositoryName)//repository.get('name'))
+      .then(() => {
+        ExtJS.showSuccessMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_SUCCESS);
+      })
+      .catch((error) => {
+        ExtJS.showErrorMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_ERROR);
+        console.error(error);
+      });
+  };
   
   return <ContentBody className='nxrm-download-report-field'>
     <Section>
-      <Textfield
-        name='fileName'
-        value={fileName}
-        onChange={handleInputChange}
-        isRequired={!isLoading}
-        className='nxrm-download-report-field'
-      />
       <SectionFooter>
         <Button
             variant='primary'
+            onClick={handleReport}
         >
           {UIStrings.REPORT_FORM.ACTIONS.downloadReport}
         </Button>
-        <Button
-        >
+        <Button>
           {UIStrings.REPORT_FORM.ACTIONS.cancel}
         </Button>
       </SectionFooter>
