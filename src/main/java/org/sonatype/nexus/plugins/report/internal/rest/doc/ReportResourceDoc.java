@@ -10,9 +10,13 @@
  * of Sonatype, Inc. Apache Maven is a trademark of the Apache Software Foundation. M2eclipse is a trademark of the
  * Eclipse Foundation. All other trademarks are the property of their respective owners.
  */
-package org.sonatype.nexus.plugins.report.internal.resources.doc;
+package org.sonatype.nexus.plugins.report.internal.rest.doc;
 
 import java.io.IOException;
+
+import javax.ws.rs.core.Response;
+
+import org.sonatype.nexus.repository.rest.internal.resources.ComponentsResource;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,5 +34,5 @@ public interface ReportResourceDoc {
     @ApiOperation(value = "Download the report")
     @ApiResponses(value = { @ApiResponse(code = 403, message = "Insufficient permissions to download a report"),
             @ApiResponse(code = 422, message = "Parameter 'repository' is required") })
-    void downloadReport(@ApiParam("Name of the report") final String fileName, @ApiParam("Name of the repository") final String repositoryName) throws IOException;
+    Response downloadReport(@ApiParam("Name of the repository") final String repositoryName) throws IOException;
 }

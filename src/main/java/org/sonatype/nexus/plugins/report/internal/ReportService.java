@@ -10,7 +10,7 @@ import org.sonatype.nexus.common.wonderland.DownloadService.Download;
 @Singleton
 public class ReportService extends ComponentSupport {
 
-    public Download downloadReport(final ReportXO reportXO) {
+    public Download downloadReport(final String repositoryName) {
         return null;
     }
 
