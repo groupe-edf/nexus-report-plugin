@@ -34,5 +34,5 @@ public interface ReportResourceDoc {
     @ApiOperation(value = "Download the report")
     @ApiResponses(value = { @ApiResponse(code = 403, message = "Insufficient permissions to download a report"),
             @ApiResponse(code = 422, message = "Parameter 'repository' is required") })
-    Response downloadReport(@ApiParam("Name of the repository") final String repositoryName) throws IOException;
+    Response downloadExcelReport(@ApiParam("Name of the repository") final String repositoryName) throws IOException;
 }
