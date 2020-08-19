@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,29 +34,30 @@ public class ReportResource extends ComponentSupport implements Resource, Report
 
     public static final String RESOURCE_PATH = "internal/ui/report";
 
-    private ReportService downloadReportService;
+    private ReportService reportService;
     private ObjectMapper objectMapper;
 
     @Inject
     public ReportResource(final DownloadService downloadService, final ReportService downloadReportService,
             final ObjectMapper objectMapper) {
-        this.downloadReportService = downloadReportService;
+        this.reportService = downloadReportService;
         this.objectMapper = objectMapper;
     }
 
     @Timed
     @ExceptionMetered
     @Validate
-    @POST
+    @GET
     @Path("{repositoryName}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @RequiresPermissions("nexus:report:export")
-    public Response downloadReport(@PathParam("repositoryName") final String repositoryName) {
-        String fileName = repositoryName;
+    public Response downloadExcelReport(@PathParam("repositoryName") final String repositoryName) {
+        String fileName = repositoryName + ".xlsx";
         log.info("Report name : {}", fileName);
         try {
-            Download report = downloadReportService.downloadReport(repositoryName);
+            Download report = reportService.downloadReport(repositoryName, "excel");
+            //Download report = new Download(0, new ByteArrayInputStream(new String("").getBytes()));
             return Response.ok(report.getBytes())
                     .header(CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
                     .header(CONTENT_LENGTH, report.getLength()).build();
