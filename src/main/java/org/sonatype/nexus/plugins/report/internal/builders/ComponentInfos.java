@@ -1,6 +1,5 @@
 package org.sonatype.nexus.plugins.report.internal.builders;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +10,11 @@ public class ComponentInfos {
     private String version;
     private String format;
     private Long size;
-    private Long sizeMo;
-    private Long sizeGo;
+    private Double sizeMo;
+    private Double sizeGo;
     private String createdBy;
-    private LocalDateTime lastUpdated;
-    private LocalDateTime lastDownloaded;
+    private String lastUpdated;
+    private String lastDownloaded;
     private String encoded;
 
     public String getGroup() {
@@ -58,19 +57,19 @@ public class ComponentInfos {
         this.size = size;
     }
 
-    public Long getSizeMo() {
+    public Double getSizeMo() {
         return sizeMo;
     }
 
-    public void setSizeMo(Long sizeMo) {
+    public void setSizeMo(Double sizeMo) {
         this.sizeMo = sizeMo;
     }
 
-    public Long getSizeGo() {
+    public Double getSizeGo() {
         return sizeGo;
     }
 
-    public void setSizeGo(Long sizeGo) {
+    public void setSizeGo(Double sizeGo) {
         this.sizeGo = sizeGo;
     }
 
@@ -82,19 +81,19 @@ public class ComponentInfos {
         this.createdBy = createdBy;
     }
 
-    public LocalDateTime getLastUpdated() {
+    public String getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(LocalDateTime lastUpdated) {
+    public void setLastUpdated(String lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
-    public LocalDateTime getLastDownloaded() {
+    public String getLastDownloaded() {
         return lastDownloaded;
     }
 
-    public void setLastDownloaded(LocalDateTime lastDownloaded) {
+    public void setLastDownloaded(String lastDownloaded) {
         this.lastDownloaded = lastDownloaded;
     }
 
