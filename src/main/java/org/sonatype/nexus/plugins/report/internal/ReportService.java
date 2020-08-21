@@ -41,7 +41,8 @@ public class ReportService extends ComponentSupport {
         this.repositoryManager = repositoryManager;
     }
 
-    public Download downloadReport(final String repositoryName, final String type) throws IOException, RepositoryNotFoundException {
+    public Download downloadReport(final String repositoryName, final String type)
+            throws IOException, RepositoryNotFoundException {
         ByteArrayOutputStream out;
 
         List<ComponentInfos> componentInfos = getComponentsInfos(repositoryName);
@@ -124,7 +125,7 @@ public class ReportService extends ComponentSupport {
                 .setSizeGo(BigDecimal.valueOf(componentSize).divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP)
                         .divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP)
                         .divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP).doubleValue());
-        componentInfos.setCreatedBy(componentCreatedBy);
+        componentInfos.setCreatedBy(null != componentCreatedBy ? componentCreatedBy : "system");
         componentInfos.setLastUpdated(
                 null != componentLastUpdated ? componentLastUpdated.toString("yyyy-MM-dd'T'hh:mm:ss") : "");
         componentInfos.setLastDownloaded(
