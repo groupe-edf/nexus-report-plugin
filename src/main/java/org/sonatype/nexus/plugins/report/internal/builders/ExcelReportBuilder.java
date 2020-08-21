@@ -66,19 +66,18 @@ public class ExcelReportBuilder {
             row.createCell(9).setCellValue(componentsInfos.get(i).getLastDownloaded());
             row.createCell(10).setCellValue(componentsInfos.get(i).getEncoded());
         }
-        // AutoSize Column
-        XSSFRow firstRow = sheet.getRow(sheet.getFirstRowNum());
-        for (int colIndex = 0; colIndex < headers.size(); colIndex++) {
-            sheet.autoSizeColumn(colIndex);
-        }
         // Apply table style
         if (!componentsInfos.isEmpty()) {
             XSSFTable table = sheet.createTable(new AreaReference(new CellReference(0, 0),
-                    new CellReference(sheet.getLastRowNum(), firstRow.getLastCellNum() - 1),
+                    new CellReference(sheet.getLastRowNum(), sheet.getRow(sheet.getFirstRowNum()).getLastCellNum() - 1),
                     SpreadsheetVersion.EXCEL2007));
             table.setStyleName("TableStyleMedium13");
             CTTable cttable = table.getCTTable();
             cttable.addNewAutoFilter();
+        }
+        // AutoSize Column
+        for (int colIndex = 0; colIndex < headers.size(); colIndex++) {
+            sheet.autoSizeColumn(colIndex);
         }
         return sheet;
     }
