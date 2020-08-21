@@ -25,23 +25,19 @@ import org.sonatype.nexus.validation.Validate;
 
 import com.codahale.metrics.annotation.ExceptionMetered;
 import com.codahale.metrics.annotation.Timed;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Named
 @Singleton
 @Path(ReportResource.RESOURCE_PATH)
 public class ReportResource extends ComponentSupport implements Resource, ReportResourceDoc {
 
-    public static final String RESOURCE_PATH = "internal/ui/report";
+    public static final String RESOURCE_PATH = "v1/report";
 
     private ReportService reportService;
-    private ObjectMapper objectMapper;
 
     @Inject
-    public ReportResource(final DownloadService downloadService, final ReportService downloadReportService,
-            final ObjectMapper objectMapper) {
+    public ReportResource(final DownloadService downloadService, final ReportService downloadReportService) {
         this.reportService = downloadReportService;
-        this.objectMapper = objectMapper;
     }
 
     @Timed
@@ -57,7 +53,6 @@ public class ReportResource extends ComponentSupport implements Resource, Report
         log.info("Report name : {}", fileName);
         try {
             Download report = reportService.downloadReport(repositoryName, "excel");
-            //Download report = new Download(0, new ByteArrayInputStream(new String("").getBytes()));
             return Response.ok(report.getBytes())
                     .header(CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
                     .header(CONTENT_LENGTH, report.getLength()).build();

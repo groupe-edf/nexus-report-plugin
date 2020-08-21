@@ -9,7 +9,7 @@ export default function DownloadReport() {
     enabled: false,
     repositoryName: ''
   });
-  const repositoryName = 'test';
+  const repositoryName = 'maven-releases';
   const [isLoading, setIsLoading] = useState(true);
   
   const handleInputChange = (event) => {
@@ -23,12 +23,12 @@ export default function DownloadReport() {
   };
 
   const handleReport = () => {
-      Axios.post('/service/rest/internal/ui/report/' + repositoryName)//repository.get('name'))
+      Axios.get('/service/rest/v1/report/' + repositoryName)//repository.get('name'))
       .then(() => {
-        ExtJS.showSuccessMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_SUCCESS);
+        //ExtJS.showSuccessMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_SUCCESS);
       })
       .catch((error) => {
-        ExtJS.showErrorMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_ERROR);
+        //ExtJS.showErrorMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_ERROR);
         console.error(error);
       });
   };
@@ -39,6 +39,7 @@ export default function DownloadReport() {
         <Button
             variant='primary'
             onClick={handleReport}
+            download
         >
           {UIStrings.REPORT_FORM.ACTIONS.downloadReport}
         </Button>
