@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -20,7 +19,6 @@ import org.sonatype.nexus.common.wonderland.DownloadService.Download;
 import org.sonatype.nexus.plugins.report.internal.builders.ComponentInfos;
 import org.sonatype.nexus.plugins.report.internal.builders.ExcelReportBuilder;
 import org.sonatype.nexus.repository.Repository;
-import org.sonatype.nexus.repository.manager.RepositoryManager;
 import org.sonatype.nexus.repository.rest.api.RepositoryNotFoundException;
 import org.sonatype.nexus.repository.storage.Asset;
 import org.sonatype.nexus.repository.storage.Component;
@@ -34,23 +32,16 @@ public class ReportService extends ComponentSupport {
 
     private static final String EXCEL_TYPE = "excel";
 
-    private RepositoryManager repositoryManager;
-
-    @Inject
-    public ReportService(final RepositoryManager repositoryManager) {
-        this.repositoryManager = repositoryManager;
-    }
-
-    public Download downloadReport(final String repositoryName, final String type)
+    public Download downloadReport(final Repository repository, final String type)
             throws IOException, RepositoryNotFoundException {
         ByteArrayOutputStream out;
 
-        List<ComponentInfos> componentInfos = getComponentsInfos(repositoryName);
+        List<ComponentInfos> componentInfos = getComponentsInfos(repository);
 
         switch (type) {
         case EXCEL_TYPE:
             ExcelReportBuilder excelBuilder = new ExcelReportBuilder();
-            excelBuilder.buildSheet(repositoryName, componentInfos);
+            excelBuilder.buildSheet(repository.getName(), componentInfos);
             out = excelBuilder.buildExcelFile();
             break;
         default:
@@ -62,9 +53,8 @@ public class ReportService extends ComponentSupport {
         return new Download(size, in);
     }
 
-    private List<ComponentInfos> getComponentsInfos(String repositoryName) throws RepositoryNotFoundException {
+    private List<ComponentInfos> getComponentsInfos(Repository repository) throws RepositoryNotFoundException {
         List<ComponentInfos> componentsInfos = new ArrayList<>();
-        Repository repository = repositoryManager.get(repositoryName);
         if (null == repository) {
             throw new RepositoryNotFoundException();
         }

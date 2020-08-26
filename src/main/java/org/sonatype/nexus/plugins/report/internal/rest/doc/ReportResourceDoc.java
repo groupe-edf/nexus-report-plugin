@@ -33,6 +33,6 @@ import io.swagger.annotations.ApiResponses;
 public interface ReportResourceDoc {
     @ApiOperation(value = "Download a report for the given repository name")
     @ApiResponses(value = { @ApiResponse(code = 403, message = "Insufficient permissions to download a report"),
-            @ApiResponse(code = 422, message = "Parameter 'repositoryName' is required") })
+            @ApiResponse(code = 400, message = "Parameter 'repositoryName' is required") })
     Response downloadExcelReport(@ApiParam("Name of the repository") final String repositoryName) throws IOException;
 }
