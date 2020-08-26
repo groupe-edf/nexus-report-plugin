@@ -2,7 +2,6 @@ package org.sonatype.nexus.plugins.report.internal.rest;
 
 import static com.google.common.net.HttpHeaders.CONTENT_DISPOSITION;
 import static com.google.common.net.HttpHeaders.CONTENT_LENGTH;
-import static org.sonatype.nexus.rest.APIConstants.V1_API_PREFIX;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,10 +30,8 @@ import com.codahale.metrics.annotation.Timed;
 
 @Named
 @Singleton
-@Path(ReportResource.RESOURCE_PATH)
+@Path(ReportApiConstants.REPORT_API_RESOURCE_PATH)
 public class ReportResource extends ComponentSupport implements Resource, ReportResourceDoc {
-
-    public static final String RESOURCE_PATH = V1_API_PREFIX + "/report";
 
     private ReportService reportService;
     private RepositoryManager repositoryManager;
@@ -53,11 +50,11 @@ public class ReportResource extends ComponentSupport implements Resource, Report
     @Path("{repositoryName}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    @RequiresPermissions("nexus:report:export")
+    @RequiresPermissions(ReportApiConstants.REPORT_API_PERMISSION)
     public Response downloadExcelReport(@PathParam("repositoryName") final String repositoryName) {
         if (null == repositoryName) {
             return Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_HTML_TYPE)
-                    .entity("Parameter 'repositoryName' is required").build();
+                    .entity(ReportApiConstants.REPOSITORY_NAME_REQUIRED).build();
         }
         String fileName = repositoryName + ".xlsx";
         log.info("Report name : {}", fileName);
@@ -65,11 +62,11 @@ public class ReportResource extends ComponentSupport implements Resource, Report
             Repository repository = repositoryManager.get(repositoryName);
             if (null == repository) {
                 return Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_HTML_TYPE)
-                        .entity("Repository not found").build();
+                        .entity(ReportApiConstants.REPOSITORY_NOT_FOUND).build();
             }
             if (!repositoryPermissionChecker.userCanBrowseRepository(repository)) {
                 return Response.status(Response.Status.FORBIDDEN).type(MediaType.TEXT_HTML_TYPE)
-                        .entity("You don't have access to this repository").build();
+                        .entity(ReportApiConstants.REPOSITORY_PERMISSION_DENIED).build();
             }
             Download report = reportService.downloadReport(repository, "excel");
             return Response.ok(report.getBytes())

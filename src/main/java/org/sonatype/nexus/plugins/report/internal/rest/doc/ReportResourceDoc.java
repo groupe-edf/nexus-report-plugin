@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import javax.ws.rs.core.Response;
 
+import org.sonatype.nexus.plugins.report.internal.rest.ReportApiConstants;
 import org.sonatype.nexus.repository.rest.internal.resources.ComponentsResource;
 
 import io.swagger.annotations.Api;
@@ -29,10 +30,10 @@ import io.swagger.annotations.ApiResponses;
  *
  * @since 3.4.0
  */
-@Api(value = "Report")
+@Api(value = ReportApiConstants.REPORT_API_NAME)
 public interface ReportResourceDoc {
-    @ApiOperation(value = "Download a report for the given repository name")
-    @ApiResponses(value = { @ApiResponse(code = 403, message = "Insufficient permissions to download a report"),
-            @ApiResponse(code = 400, message = "Parameter 'repositoryName' is required") })
-    Response downloadExcelReport(@ApiParam("Name of the repository") final String repositoryName) throws IOException;
+    @ApiOperation(value = ReportApiConstants.DOWNLOAD_REPORT_API_OPERATION)
+    @ApiResponses(value = { @ApiResponse(code = 403, message = ReportApiConstants.REPORT_PERMISSION_DENIED),
+            @ApiResponse(code = 400, message = ReportApiConstants.REPOSITORY_NAME_REQUIRED) })
+    Response downloadExcelReport(@ApiParam(ReportApiConstants.REPOSITORY_NAME_DESCRIPTION) final String repositoryName) throws IOException;
 }
