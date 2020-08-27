@@ -41,6 +41,8 @@ public class ReportResource extends ComponentSupport implements Resource, Report
     public ReportResource(final ReportService downloadReportService, final RepositoryManager repositoryManager,
             final RepositoryPermissionChecker repositoryPermissionChecker) {
         this.reportService = downloadReportService;
+        this.repositoryManager = repositoryManager;
+        this.repositoryPermissionChecker = repositoryPermissionChecker;
     }
 
     @Timed
