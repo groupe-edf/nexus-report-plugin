@@ -20,6 +20,13 @@ export default {
     },
     LABELS: {
       fileName: 'File Name'
-    }
+    } 
+  },
+  REPOSITORY_LIST: {
+    filterPlaceHolder: 'search',
+    repositoryName: 'Repository Name',
+    format: 'format',
+    type: 'type',
+    url: 'url'
   }
 };
