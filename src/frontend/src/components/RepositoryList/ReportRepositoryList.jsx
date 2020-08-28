@@ -19,14 +19,17 @@ import {
   SectionActions,
   SectionHeader
 } from 'nexus-ui-plugin';
+import { useContext } from 'react';
 
 const INITIAL_VALUE = {};
 
 export default function ReportRepositoryList() {
   const [repositoryList, setRepositoryList] = useState(INITIAL_VALUE);
-
+  var repositoryListFiltered = repositoryList;
   const isLoaded = repositoryList !== INITIAL_VALUE;
   const isLoading = !isLoaded;
+  var filterText = '';
+
 
   useEffect(() => {
     if (isLoaded) {
@@ -47,16 +50,32 @@ export default function ReportRepositoryList() {
     // });
   }
 
+  function filterRepositoriesList() {
+    if(filterText) {
+      repositoryListFiltered = repositoryListFiltered.filter((repo) => repo.name.includes(filterText));
+    } else {
+      clearFilter();
+    }
+  }
+
+  function clearFilter() {
+    repositoryListFiltered = repositoryList;
+  }
+
+  function sortRepositoriesList(key, dir) {
+
+  }
+
   return <ContentBody className='nxrm-repository-list'>
     <Section>
-      {/* <SectionActions>
+      <SectionActions>
         <NxFilterInput
           inputId="filter"
-          onChange={filter}
-          onClear={clearFilter}
           value={filterText}
+          onChange={filterRepositoriesList}
+          onClear={clearFilter}
           placeholder={UIStrings.REPOSITORY_LIST.filterPlaceHolder} />
-      </SectionActions> */}
+      </SectionActions>
       <NxTable>
         <NxTableHead>
           <NxTableRow>
@@ -68,12 +87,12 @@ export default function ReportRepositoryList() {
           </NxTableRow>
         </NxTableHead>
         <NxTableBody isLoading={isLoading}>
-          {Object.keys(repositoryList).map((repo) => (
-            <NxTableRow key={repositoryList[repo].name} isClickable onClick={() => handleReport(repositoryList[repo].name)}>
-              <NxTableCell>{repositoryList[repo].name}</NxTableCell>
-              <NxTableCell>{repositoryList[repo].format}</NxTableCell>
-              <NxTableCell>{repositoryList[repo].type}</NxTableCell>
-              <NxTableCell>{repositoryList[repo].url}</NxTableCell>
+          {Object.keys(repositoryListFiltered).map((repo) => (
+            <NxTableRow key={repositoryListFiltered[repo].name} isClickable onClick={() => handleReport(repositoryListFiltered[repo].name)}>
+              <NxTableCell>{repositoryListFiltered[repo].name}</NxTableCell>
+              <NxTableCell>{repositoryListFiltered[repo].format}</NxTableCell>
+              <NxTableCell>{repositoryListFiltered[repo].type}</NxTableCell>
+              <NxTableCell>{repositoryListFiltered[repo].url}</NxTableCell>
               <NxTableCell hasIcon><NxFontAwesomeIcon icon={faChevronRight} /></NxTableCell>
             </NxTableRow>
           ))}

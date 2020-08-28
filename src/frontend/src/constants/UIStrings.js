@@ -23,7 +23,7 @@ export default {
     } 
   },
   REPOSITORY_LIST: {
-    filterPlaceHolder: 'search',
+    filterPlaceHolder: 'Filter',
     repositoryName: 'Repository Name',
     format: 'format',
     type: 'type',
