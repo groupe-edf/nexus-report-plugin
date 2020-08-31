@@ -25,24 +25,28 @@ const INITIAL_VALUE = {};
 
 export default function ReportRepositoryList() {
   const [repositoryList, setRepositoryList] = useState(INITIAL_VALUE);
-  var repositoryListFiltered = repositoryList;
   const isLoaded = repositoryList !== INITIAL_VALUE;
   const isLoading = !isLoaded;
-  var filterText = '';
+  const [filterText, setFilterText] = useState('');
 
 
   useEffect(() => {
     if (isLoaded) {
       return;
     }
-    Axios.get('/service/rest/v1/repositories').then(response => response.data).then(data => setRepositoryList(data));
+    Axios.get('/service/rest/v1/repositories')
+      .then(response => response.data)
+      .then(data => { setRepositoryList(data) })
+      .catch((error => {
+
+      }));
   });
 
   function handleReport(repositoryName) {
     window.open(Utils.urlFromPath('/service/rest/v1/report/' + repositoryName), '_blank');
     // Axios.get('/service/rest/v1/report/' + repositoryName)
     // .then((response) => {
-      
+
     // })
     // .catch((error) => {
     //   //ExtJS.showErrorMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_ERROR);
@@ -50,16 +54,12 @@ export default function ReportRepositoryList() {
     // });
   }
 
-  function filterRepositoriesList() {
-    if(filterText) {
-      repositoryListFiltered = repositoryListFiltered.filter((repo) => repo.name.includes(filterText));
-    } else {
-      clearFilter();
-    }
+  function filter(value) {
+    setFilterText(value);
   }
 
   function clearFilter() {
-    repositoryListFiltered = repositoryList;
+    setFilterText('');
   }
 
   function sortRepositoriesList(key, dir) {
@@ -72,7 +72,7 @@ export default function ReportRepositoryList() {
         <NxFilterInput
           inputId="filter"
           value={filterText}
-          onChange={filterRepositoriesList}
+          onChange={filter}
           onClear={clearFilter}
           placeholder={UIStrings.REPOSITORY_LIST.filterPlaceHolder} />
       </SectionActions>
@@ -87,12 +87,12 @@ export default function ReportRepositoryList() {
           </NxTableRow>
         </NxTableHead>
         <NxTableBody isLoading={isLoading}>
-          {Object.keys(repositoryListFiltered).map((repo) => (
-            <NxTableRow key={repositoryListFiltered[repo].name} isClickable onClick={() => handleReport(repositoryListFiltered[repo].name)}>
-              <NxTableCell>{repositoryListFiltered[repo].name}</NxTableCell>
-              <NxTableCell>{repositoryListFiltered[repo].format}</NxTableCell>
-              <NxTableCell>{repositoryListFiltered[repo].type}</NxTableCell>
-              <NxTableCell>{repositoryListFiltered[repo].url}</NxTableCell>
+          {Object.keys(repositoryList).filter(repo => repositoryList[repo].name.includes(filterText)).map((repo) => (
+            <NxTableRow key={repositoryList[repo].name} isClickable onClick={() => handleReport(repositoryList[repo].name)}>
+              <NxTableCell>{repositoryList[repo].name}</NxTableCell>
+              <NxTableCell>{repositoryList[repo].format}</NxTableCell>
+              <NxTableCell>{repositoryList[repo].type}</NxTableCell>
+              <NxTableCell>{repositoryList[repo].url}</NxTableCell>
               <NxTableCell hasIcon><NxFontAwesomeIcon icon={faChevronRight} /></NxTableCell>
             </NxTableRow>
           ))}
