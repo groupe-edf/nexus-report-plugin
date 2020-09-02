@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import UIStrings from '../../constants/UIStrings';
 import './ReportRepositoryList.scss';
 import Axios from 'axios';
-import { faChevronRight, faPlusCircle, faRedo } from '@fortawesome/free-solid-svg-icons';
+import faChevronRight from '@fortawesome/free-solid-svg-icons';
 import {
-  Button,
   ContentBody,
   NxFilterInput,
   NxFontAwesomeIcon,
-  NxLoadWrapper,
   NxTable,
   NxTableBody,
   NxTableCell,
@@ -16,10 +14,8 @@ import {
   NxTableRow,
   Section,
   Utils,
-  SectionActions,
-  SectionHeader
+  SectionActions
 } from 'nexus-ui-plugin';
-import { useContext } from 'react';
 
 const INITIAL_VALUE = {};
 
@@ -28,7 +24,9 @@ export default function ReportRepositoryList() {
   const isLoaded = repositoryList !== INITIAL_VALUE;
   const isLoading = !isLoaded;
   const [filterText, setFilterText] = useState('');
-
+  const [nameSortDir, setNameSortDir] = useState('asc');
+  const [formatSortDir, setFormatSortDir] = useState(null);
+  const [typeSortDir, setTypeSortDir] = useState(null);
 
   useEffect(() => {
     if (isLoaded) {
@@ -36,22 +34,18 @@ export default function ReportRepositoryList() {
     }
     Axios.get('/service/rest/v1/repositories')
       .then(response => response.data)
-      .then(data => { setRepositoryList(data) })
+      .then(data => { setRepositoryList(data.sort((a, b) => a.name > b.name ? 1 : -1)) })
       .catch((error => {
-
+        console(error);
       }));
   });
 
   function handleReport(repositoryName) {
-    window.open(Utils.urlFromPath('/service/rest/v1/report/' + repositoryName), '_blank');
-    // Axios.get('/service/rest/v1/report/' + repositoryName)
-    // .then((response) => {
-
-    // })
-    // .catch((error) => {
-    //   //ExtJS.showErrorMessage(UIStrings.REPORT_FORM.MESSAGES.DOWNLOAD_ERROR);
-    //   console.error(error);
-    // });
+    try {
+      window.open(Utils.urlFromPath('/service/rest/v1/report/' + repositoryName), '_blank');
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function filter(value) {
@@ -62,8 +56,41 @@ export default function ReportRepositoryList() {
     setFilterText('');
   }
 
-  function sortRepositoriesList(key, dir) {
-
+  function sort(key) {
+    var dir;
+    switch (key) {
+      case 'name':
+        dir = nameSortDir === 'asc' ? 'desc' : 'asc';
+        setNameSortDir(dir);
+        setFormatSortDir(null);
+        setTypeSortDir(null);
+        break;
+      case 'format':
+        dir = formatSortDir === 'asc' ? 'desc' : 'asc';
+        setFormatSortDir(dir);
+        setNameSortDir(null);
+        setTypeSortDir(null);
+        break;
+      case 'type':
+        dir = typeSortDir === 'asc' ? 'desc' : 'asc';
+        setTypeSortDir(dir);
+        setNameSortDir(null);
+        setFormatSortDir(null);
+        break;
+      default:
+        break;
+    }
+    var sortedList = repositoryList.sort((a, b) => {
+      if (a[key] === b[key]) { return 0; }
+      if (dir === 'asc') {
+        return a[key] > b[key] ? 1 : -1;
+      } else if (dir === 'desc') {
+        return a[key] < b[key] ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+    setRepositoryList(sortedList);
   }
 
   return <ContentBody className='nxrm-repository-list'>
@@ -79,10 +106,10 @@ export default function ReportRepositoryList() {
       <NxTable>
         <NxTableHead>
           <NxTableRow>
-            <NxTableCell isSortable>{UIStrings.REPOSITORY_LIST.repositoryName}</NxTableCell>
-            <NxTableCell isSortable>{UIStrings.REPOSITORY_LIST.format}</NxTableCell>
-            <NxTableCell isSortable>{UIStrings.REPOSITORY_LIST.type}</NxTableCell>
-            <NxTableCell isSortable>{UIStrings.REPOSITORY_LIST.url}</NxTableCell>
+            <NxTableCell isSortable onClick={() => sort('name')} sortDir={nameSortDir}>{UIStrings.REPOSITORY_LIST.repositoryName}</NxTableCell>
+            <NxTableCell isSortable onClick={() => sort('format')} sortDir={formatSortDir}>{UIStrings.REPOSITORY_LIST.format}</NxTableCell>
+            <NxTableCell isSortable onClick={() => sort('type')} sortDir={typeSortDir}>{UIStrings.REPOSITORY_LIST.type}</NxTableCell>
+            <NxTableCell>{UIStrings.REPOSITORY_LIST.url}</NxTableCell>
             <NxTableCell hasIcon />
           </NxTableRow>
         </NxTableHead>
