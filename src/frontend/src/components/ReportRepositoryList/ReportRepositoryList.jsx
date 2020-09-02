@@ -44,7 +44,7 @@ export default function ReportRepositoryList() {
     try {
       window.open(Utils.urlFromPath('/service/rest/v1/report/' + repositoryName), '_blank');
     } catch (error) {
-      console.error(error);
+      console(error);
     }
   }
 
