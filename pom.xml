@@ -11,7 +11,7 @@
   </parent>
 
   <artifactId>nexus-report-plugin</artifactId>
-  <name>Nexus Report Plugin</name>
+  <name>${project.groupId}:${project.artifactId}</name>
   <description>Allow the user to download a reports with statistics of his repository usages</description>
   <packaging>bundle</packaging>
 
