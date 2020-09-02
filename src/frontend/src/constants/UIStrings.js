@@ -6,8 +6,8 @@ export default {
 
   REPORT_FORM: {
     MENU: {
-      text: 'Download report',
-      description: 'Download a report with usage statistics of your components'
+      text: 'Report',
+      description: 'Download a report with usage statistics of your repository'
     },
     MESSAGES: {
       LOAD_ERROR: 'An error occurred while loading components statistics, see console for more details',
