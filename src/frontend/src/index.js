@@ -1,5 +1,5 @@
 import UIStrings from './constants/UIStrings';
-import ReportRepositoryList from './components/RepositoryList/ReportRepositoryList';
+import ReportRepositoryList from './components/ReportRepositoryList/ReportRepositoryList';
 
 window.plugins.push({
   id: 'nexus-report-plugin',
