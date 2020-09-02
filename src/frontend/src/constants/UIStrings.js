@@ -1,5 +1,4 @@
 import { UIStrings } from 'nexus-ui-plugin';
-import React from 'react';
 
 export default {
   ...UIStrings,
