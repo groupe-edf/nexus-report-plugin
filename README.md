@@ -1,3 +1,5 @@
+<img src="https://zupimages.net/up/20/37/uwy6.png" width="80"/>
+
 # nexus-report-plugin
 
 Download a statistics report on your repositories.
