@@ -2,7 +2,7 @@
 
 # nexus-report-plugin
 
-Download a statistics report on your repositories.
+Download a statistics report of your repositories.
 
 ## Installation
 Copy the ".kar" file in the "deploy" directory on the Nexus server and restart the server.
