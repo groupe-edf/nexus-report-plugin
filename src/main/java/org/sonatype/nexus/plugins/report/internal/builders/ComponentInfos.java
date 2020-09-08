@@ -3,6 +3,12 @@ package org.sonatype.nexus.plugins.report.internal.builders;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represent the informations extracted on a component
+ * 
+ * @author Mathieu Delrocq
+ *
+ */
 public class ComponentInfos {
 
     private String group;
@@ -105,6 +111,10 @@ public class ComponentInfos {
         this.encoded = encoded;
     }
 
+    /**
+     * Used for the header of the report.
+     * @return the name of the ComponentInfos properties as titles;
+     */
     protected static List<String> getComponentInfosTitles() {
         List<String> componentInfosTitles = new ArrayList<>();
         componentInfosTitles.add("Group");

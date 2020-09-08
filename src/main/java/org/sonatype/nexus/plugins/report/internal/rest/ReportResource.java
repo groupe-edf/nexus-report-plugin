@@ -28,6 +28,11 @@ import org.sonatype.nexus.validation.Validate;
 import com.codahale.metrics.annotation.ExceptionMetered;
 import com.codahale.metrics.annotation.Timed;
 
+/**
+ * Represents the {@code /report} API
+ * @author Mathieu Delrocq
+ *
+ */
 @Named
 @Singleton
 @Path(ReportApiConstants.REPORT_API_RESOURCE_PATH)

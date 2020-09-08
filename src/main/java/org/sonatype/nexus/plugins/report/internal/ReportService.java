@@ -32,6 +32,17 @@ public class ReportService extends ComponentSupport {
 
     private static final String EXCEL_TYPE = "excel";
 
+    /**
+     * Main method of ReportService. <br>
+     * Get components informations for the given repository name and build the
+     * report with the given type.
+     * 
+     * @param repository
+     * @param type
+     * @return {@link Download}
+     * @throws IOException
+     * @throws RepositoryNotFoundException
+     */
     public Download downloadReport(final Repository repository, final String type)
             throws IOException, RepositoryNotFoundException {
         ByteArrayOutputStream out;
@@ -53,6 +64,13 @@ public class ReportService extends ComponentSupport {
         return new Download(size, in);
     }
 
+    /**
+     * Get all {@link Component} of the given {@link Repository}.
+     * 
+     * @param repository
+     * @return a list of {@link ComponentInfos}
+     * @throws RepositoryNotFoundException
+     */
     private List<ComponentInfos> getComponentsInfos(Repository repository) throws RepositoryNotFoundException {
         List<ComponentInfos> componentsInfos = new ArrayList<>();
         if (null == repository) {
@@ -68,6 +86,15 @@ public class ReportService extends ComponentSupport {
         return componentsInfos;
     }
 
+    /**
+     * Get all needed informations of a component and build a
+     * {@link ComponentInfos}.
+     * 
+     * @param repository
+     * @param tx
+     * @param component
+     * @return {@link ComponentInfos}
+     */
     private ComponentInfos getComponentInfos(Repository repository, StorageTx tx, Component component) {
         ComponentInfos componentInfos = new ComponentInfos();
 

@@ -28,6 +28,7 @@ import io.swagger.annotations.ApiResponses;
 /**
  * Swagger documentation for {@link ComponentsResource}
  *
+ * @author Mathieu Delrocq
  * @since 3.4.0
  */
 @Api(value = ReportApiConstants.REPORT_API_NAME)
@@ -35,5 +36,6 @@ public interface ReportResourceDoc {
     @ApiOperation(value = ReportApiConstants.DOWNLOAD_REPORT_API_OPERATION)
     @ApiResponses(value = { @ApiResponse(code = 403, message = ReportApiConstants.REPORT_PERMISSION_DENIED),
             @ApiResponse(code = 400, message = ReportApiConstants.REPOSITORY_NAME_REQUIRED) })
-    Response downloadExcelReport(@ApiParam(ReportApiConstants.REPOSITORY_NAME_DESCRIPTION) final String repositoryName) throws IOException;
+    Response downloadExcelReport(@ApiParam(ReportApiConstants.REPOSITORY_NAME_DESCRIPTION) final String repositoryName)
+            throws IOException;
 }

@@ -2,7 +2,13 @@ package org.sonatype.nexus.plugins.report.internal.rest;
 
 import static org.sonatype.nexus.rest.APIConstants.V1_API_PREFIX;
 
-public class ReportApiConstants {
+/**
+ * All constants used by {@code /report} API
+ * 
+ * @author Mathieu Delrocq
+ *
+ */
+public final class ReportApiConstants {
 
     // ReportResource
 

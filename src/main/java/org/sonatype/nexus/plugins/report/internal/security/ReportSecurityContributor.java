@@ -24,8 +24,10 @@ import org.sonatype.nexus.security.config.SecurityContributor;
 import org.sonatype.nexus.security.config.memory.MemoryCPrivilege;
 
 /**
- * Nexus report security configuration.
+ * Nexus report security configuration. <br>
+ * Represents the {@code nx-report-download} permission.
  *
+ * @author Mathieu Delrocq
  * @since 3.0
  */
 @Named

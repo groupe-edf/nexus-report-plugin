@@ -18,20 +18,43 @@ import org.apache.poi.xssf.usermodel.XSSFTable;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openxmlformats.schemas.spreadsheetml.x2006.main.CTTable;
 
+/**
+ * Builder of the Excel report.
+ * 
+ * @author Mathieu Delrocq
+ *
+ */
 public class ExcelReportBuilder {
 
     private Workbook workbook;
 
+    /**
+     * Default constructor, instanciate a XSSFWorkbook
+     */
     public ExcelReportBuilder() {
         this.workbook = new XSSFWorkbook();
     }
 
+    /**
+     * Get the OutputStream from the workbook
+     * 
+     * @return
+     * @throws IOException
+     */
     public ByteArrayOutputStream buildExcelFile() throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         workbook.write(outputStream);
         return outputStream;
     }
 
+    /**
+     * Build a {@link Sheet} with the given name. Each ComponentInfos will be write as a
+     * line. An header with filters is added by default.
+     * 
+     * @param sheetName
+     * @param componentsInfos
+     * @return org.apache.poi.ss.usermodel.Sheet
+     */
     public Sheet buildSheet(String sheetName, List<ComponentInfos> componentsInfos) {
         XSSFSheet sheet = (XSSFSheet) workbook.createSheet(sheetName);
         DataFormat format = workbook.createDataFormat();
