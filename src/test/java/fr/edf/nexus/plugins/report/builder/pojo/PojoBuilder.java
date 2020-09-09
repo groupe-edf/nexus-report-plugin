@@ -21,15 +21,15 @@ public class PojoBuilder {
         componentInfosList.add(buildComponentInfos("component10"));
         return componentInfosList;
     }
-    
+
     public static ComponentInfos buildComponentInfos(String name) {
         ComponentInfos componentInfos = new ComponentInfos();
         componentInfos.setName(name);
         componentInfos.setCreatedBy("user1");
         componentInfos.setGroup("org.test");
         componentInfos.setSize(Long.valueOf(8900));
-        componentInfos.setSizeMo(Double.valueOf(componentInfos.getSize()/1024));
-        componentInfos.setSizeGo(Double.valueOf(componentInfos.getSizeMo()/1024));
+        componentInfos.setSizeMo(Double.valueOf(componentInfos.getSize() / 1024));
+        componentInfos.setSizeGo(Double.valueOf(componentInfos.getSizeMo() / 1024));
         componentInfos.setVersion("1.0.0");
         componentInfos.setFormat("jar");
         componentInfos.setLastDownloaded("never");
