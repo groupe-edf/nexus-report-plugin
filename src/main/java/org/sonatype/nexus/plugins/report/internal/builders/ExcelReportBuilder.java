@@ -77,12 +77,12 @@ public class ExcelReportBuilder {
             row.createCell(1).setCellValue(componentsInfos.get(i).getName());
             row.createCell(2).setCellValue(componentsInfos.get(i).getVersion());
             row.createCell(3).setCellValue(componentsInfos.get(i).getFormat());
-            row.createCell(4).setCellValue(componentsInfos.get(i).getSize());
+            row.createCell(4).setCellValue(componentsInfos.get(i).getSize() != null ? componentsInfos.get(i).getSize() : 0);
             XSSFCell cell = row.createCell(5);
-            cell.setCellValue(componentsInfos.get(i).getSizeMo());
+            cell.setCellValue(componentsInfos.get(i).getSizeMo() != null ? componentsInfos.get(i).getSizeMo() : 0);
             cell.setCellStyle(style);
             cell = row.createCell(6);
-            cell.setCellValue(componentsInfos.get(i).getSizeGo());
+            cell.setCellValue(componentsInfos.get(i).getSizeGo() != null ? componentsInfos.get(i).getSizeMo() : 0);
             cell.setCellStyle(style);
             row.createCell(7).setCellValue(componentsInfos.get(i).getCreatedBy());
             row.createCell(8).setCellValue(componentsInfos.get(i).getLastUpdated());
