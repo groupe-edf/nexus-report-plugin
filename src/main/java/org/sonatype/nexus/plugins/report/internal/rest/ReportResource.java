@@ -43,9 +43,9 @@ public class ReportResource extends ComponentSupport implements Resource, Report
     private RepositoryPermissionChecker repositoryPermissionChecker;
 
     @Inject
-    public ReportResource(final ReportService downloadReportService, final RepositoryManager repositoryManager,
+    public ReportResource(final ReportService reportService, final RepositoryManager repositoryManager,
             final RepositoryPermissionChecker repositoryPermissionChecker) {
-        this.reportService = downloadReportService;
+        this.reportService = reportService;
         this.repositoryManager = repositoryManager;
         this.repositoryPermissionChecker = repositoryPermissionChecker;
     }
