@@ -15,7 +15,7 @@ Of course, an administrator have this permission by default.
 ## Usage
 If one of yours rôles have the permission "nx-report-download", you should see a **"Report"** button (1) on the left side menu.
 When you click on it a list of your granted repositories will be displayed. You have the possibility to sort it (2) or filter it (3) with the field at the top-right.
-When you click on a repository of the list, if will download the report associated to this repository.
+When you click on a repository of the list, it will download the report associated to this repository.
 
 ## Example
 
