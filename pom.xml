@@ -14,10 +14,19 @@
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Allow the user to download a reports with statistics of his repository usages</description>
   <packaging>bundle</packaging>
+  <version>0.1.0</version>
 
   <properties>
     <sonar.sources>src/main/java,src/main/resources/static/rapture</sonar.sources>
   </properties>
+
+  <developers>
+    <developer>
+      <id>mat1e</id>
+      <name>Mathieu Delrocq</name>
+      <email>delrocq.mathieu@gmail.com</email>
+    </developer>
+  </developers>
 
   <dependencies>
     <dependency>
