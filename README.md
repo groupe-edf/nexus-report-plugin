@@ -5,7 +5,7 @@
 Download a statistics report of your repositories.
 
 ## Build
-You don't need to build the code to install the plugin, the last release .kar file is available in the `kar/` folder.
+You don't need to build the code to install the plugin, you can find the .kar file in the last release.
 
 If you want to build the plugin by yourself, you need somes front components from nexus-ui-plugin.
 The easier way is to checkout the <a href="https://github.com/sonatype/nexus-public">nexus-public</a> repository and copy nexus-report-plugin in the `nexus-public/plugins/` folder.
