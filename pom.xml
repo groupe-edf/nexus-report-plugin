@@ -20,6 +20,13 @@
     <sonar.sources>src/main/java,src/main/resources/static/rapture</sonar.sources>
   </properties>
 
+  <licenses>
+    <license>
+      <name>Eclipse Public License 1.0</name>
+      <url>https://github.com/groupe-edf/nexus-report-plugin/blob/master/LICENSE.txt</url>
+    </license>
+  </licenses>
+
   <developers>
     <developer>
       <id>mat1e</id>
