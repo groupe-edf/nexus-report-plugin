@@ -1,4 +1,4 @@
-package fr.edf.nexus.plugins.report.internal.rest;
+package org.sonatype.nexus.plugins.report.internal.rest;
 
 import static org.mockito.Mockito.when;
 

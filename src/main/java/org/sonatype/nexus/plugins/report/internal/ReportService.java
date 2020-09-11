@@ -71,7 +71,7 @@ public class ReportService extends ComponentSupport {
      * @return a list of {@link ComponentInfos}
      * @throws RepositoryNotFoundException
      */
-    private List<ComponentInfos> getComponentsInfos(Repository repository) throws RepositoryNotFoundException {
+    private List<ComponentInfos> getComponentsInfos(final Repository repository) throws RepositoryNotFoundException {
         List<ComponentInfos> componentsInfos = new ArrayList<>();
         if (null == repository) {
             throw new RepositoryNotFoundException();
@@ -95,7 +95,8 @@ public class ReportService extends ComponentSupport {
      * @param component
      * @return {@link ComponentInfos}
      */
-    private ComponentInfos getComponentInfos(Repository repository, StorageTx tx, Component component) {
+    private ComponentInfos getComponentInfos(final Repository repository, final StorageTx tx,
+            final Component component) {
         ComponentInfos componentInfos = new ComponentInfos();
 
         Long componentSize = 0L;

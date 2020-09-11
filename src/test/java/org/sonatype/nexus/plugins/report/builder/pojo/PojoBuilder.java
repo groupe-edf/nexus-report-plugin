@@ -1,4 +1,4 @@
-package fr.edf.nexus.plugins.report.builder.pojo;
+package org.sonatype.nexus.plugins.report.builder.pojo;
 
 import java.util.ArrayList;
 import java.util.List;

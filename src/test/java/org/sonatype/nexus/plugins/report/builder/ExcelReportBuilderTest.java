@@ -1,4 +1,4 @@
-package fr.edf.nexus.plugins.report.builder;
+package org.sonatype.nexus.plugins.report.builder;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,10 +9,9 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.junit.Assert;
 import org.junit.Test;
+import org.sonatype.nexus.plugins.report.builder.pojo.PojoBuilder;
 import org.sonatype.nexus.plugins.report.internal.builders.ComponentInfos;
 import org.sonatype.nexus.plugins.report.internal.builders.ExcelReportBuilder;
-
-import fr.edf.nexus.plugins.report.builder.pojo.PojoBuilder;
 
 public class ExcelReportBuilderTest {
 
