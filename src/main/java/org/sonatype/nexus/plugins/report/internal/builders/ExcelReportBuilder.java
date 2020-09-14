@@ -82,7 +82,7 @@ public class ExcelReportBuilder {
             cell.setCellValue(componentsInfos.get(i).getSizeMo() != null ? componentsInfos.get(i).getSizeMo() : 0);
             cell.setCellStyle(style);
             cell = row.createCell(6);
-            cell.setCellValue(componentsInfos.get(i).getSizeGo() != null ? componentsInfos.get(i).getSizeMo() : 0);
+            cell.setCellValue(componentsInfos.get(i).getSizeGo() != null ? componentsInfos.get(i).getSizeGo() : 0);
             cell.setCellStyle(style);
             row.createCell(7).setCellValue(componentsInfos.get(i).getCreatedBy());
             row.createCell(8).setCellValue(componentsInfos.get(i).getLastUpdated());
