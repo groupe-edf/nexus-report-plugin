@@ -98,10 +98,10 @@ public class ExcelReportBuilder {
             CTTable cttable = table.getCTTable();
             cttable.addNewAutoFilter();
         }
-        // AutoSize Column
-        for (int colIndex = 0; colIndex < headers.size(); colIndex++) {
-            sheet.autoSizeColumn(colIndex);
-        }
+        // AutoSize Column // Don't work with headless mode. Need another solution
+//        for (int colIndex = 0; colIndex < headers.size(); colIndex++) {
+//            sheet.autoSizeColumn(colIndex);
+//        }
         return sheet;
     }
 }
