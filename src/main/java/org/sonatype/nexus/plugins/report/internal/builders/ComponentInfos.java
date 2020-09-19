@@ -16,8 +16,8 @@ public class ComponentInfos {
     private String version;
     private String format;
     private Long size;
-    private Double sizeMo;
-    private Double sizeGo;
+    private Double sizeMB;
+    private Double sizeGB;
     private String createdBy;
     private String lastUpdated;
     private String lastDownloaded;
@@ -63,20 +63,20 @@ public class ComponentInfos {
         this.size = size;
     }
 
-    public Double getSizeMo() {
-        return sizeMo;
+    public Double getSizeMB() {
+        return sizeMB;
     }
 
-    public void setSizeMo(Double sizeMo) {
-        this.sizeMo = sizeMo;
+    public void setSizeMB(Double sizeMB) {
+        this.sizeMB = sizeMB;
     }
 
-    public Double getSizeGo() {
-        return sizeGo;
+    public Double getSizeGB() {
+        return sizeGB;
     }
 
-    public void setSizeGo(Double sizeGo) {
-        this.sizeGo = sizeGo;
+    public void setSizeGB(Double sizeGB) {
+        this.sizeGB = sizeGB;
     }
 
     public String getCreatedBy() {
@@ -121,9 +121,9 @@ public class ComponentInfos {
         componentInfosTitles.add("Name");
         componentInfosTitles.add("Version");
         componentInfosTitles.add("Format");
-        componentInfosTitles.add("Size (octets)");
-        componentInfosTitles.add("Size (Mo)");
-        componentInfosTitles.add("Size (Go)");
+        componentInfosTitles.add("Size (Bytes)");
+        componentInfosTitles.add("Size (MB)");
+        componentInfosTitles.add("Size (GB)");
         componentInfosTitles.add("Created by");
         componentInfosTitles.add("Last updated");
         componentInfosTitles.add("Last downloaded");

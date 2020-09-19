@@ -137,10 +137,10 @@ public class ReportService extends ComponentSupport {
         componentInfos.setFormat(component.format());
         componentInfos.setSize(componentSize);
         componentInfos
-                .setSizeMo(BigDecimal.valueOf(componentSize).divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP)
+                .setSizeMB(BigDecimal.valueOf(componentSize).divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP)
                         .divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP).doubleValue());
         componentInfos
-                .setSizeGo(BigDecimal.valueOf(componentSize).divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP)
+                .setSizeGB(BigDecimal.valueOf(componentSize).divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP)
                         .divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP)
                         .divide(BigDecimal.valueOf(1024), 2, RoundingMode.HALF_UP).doubleValue());
         componentInfos.setCreatedBy(null != componentCreatedBy ? componentCreatedBy : "system");

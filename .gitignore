@@ -4,5 +4,6 @@
 /target/
 /node_modules/
 /dist/
+/bin/
 /yarn-error.log
 /junit.xml
