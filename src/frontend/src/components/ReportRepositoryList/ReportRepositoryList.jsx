@@ -15,7 +15,7 @@ import {
   Section,
   Utils,
   SectionActions
-} from 'nexus-ui-plugin';
+} from '@sonatype/react-shared-components';
 
 const INITIAL_VALUE = {};
 
