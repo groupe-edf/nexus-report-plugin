@@ -1,4 +1,4 @@
-import { UIStrings } from 'nexus-ui-plugin';
+import { UIStrings } from '@sonatype/react-shared-components';
 
 export default {
   ...UIStrings,
