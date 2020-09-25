@@ -30,7 +30,7 @@
     "@babel/plugin-proposal-class-properties": "=7.7.0",
     "@testing-library/jest-dom": "=4.2.4",
     "@testing-library/react": "=9.4.0",
-    "acorn": "=7.0.0",
+    "acorn": "=8.0.1",
     "babel-jest": "=24.8.0",
     "babel-loader": "=8.0.6",
     "babel-polyfill": "=6.26.0",
