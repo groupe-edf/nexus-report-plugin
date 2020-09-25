@@ -1,6 +1,8 @@
 <img src="https://zupimages.net/up/20/37/uwy6.png" width="80"/>
 
 # nexus-report-plugin
+[![Build Status](https://travis-ci.org/groupe-edf/nexus-report-plugin.svg?branch=master)](https://travis-ci.org/github/groupe-edf/nexus-report-plugin)
+[![Coverage Status](https://coveralls.io/repos/github/groupe-edf/nexus-report-plugin/badge.svg?branch=master)](https://coveralls.io/github/groupe-edf/nexus-report-plugin?branch=master)
 
 Download a statistics report of your repositories.
 
