@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.ws.rs.core.Response;
 
@@ -15,7 +16,9 @@ import org.mockito.Mock;
 import org.sonatype.goodies.testsupport.TestSupport;
 import org.sonatype.nexus.common.event.EventManager;
 import org.sonatype.nexus.common.wonderland.DownloadService.Download;
+import org.sonatype.nexus.plugins.report.builder.pojo.PojoBuilder;
 import org.sonatype.nexus.plugins.report.internal.ReportService;
+import org.sonatype.nexus.plugins.report.internal.builders.ComponentInfos;
 import org.sonatype.nexus.repository.Format;
 import org.sonatype.nexus.repository.Repository;
 import org.sonatype.nexus.repository.manager.RepositoryManager;
@@ -108,7 +111,7 @@ public class ReportResourceTest extends TestSupport {
         assert response.getHeaders().get(com.google.common.net.HttpHeaders.CONTENT_LENGTH).get(0).toString()
                 .equals("0");
     }
-    
+
     @Test
     public void downloadJsonReport_should_return_Parameter_repositoryName_is_required() {
         Response response = reportResource.downloadJsonReport(null);
@@ -147,6 +150,23 @@ public class ReportResourceTest extends TestSupport {
         }
         Response response = reportResource.downloadJsonReport("test");
         assert response.getStatus() == 500;
+    }
+
+    @Test
+    public void downloadJsonReport_should_return_response_with_10_components() {
+        String repositoryName = "test";
+        when(repositoryManager.get(repositoryName)).thenReturn(repository);
+        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
+        try {
+            when(reportService.getComponentsInfos(repository)).thenReturn(PojoBuilder.buildComponentInfosList());
+        } catch (RepositoryNotFoundException e) {
+            Assert.fail();
+        }
+        Response response = reportResource.downloadJsonReport("test");
+        assert response.hasEntity();
+        @SuppressWarnings("unchecked")
+        List<ComponentInfos> responseBody = (List<ComponentInfos>) response.getEntity();
+        assert responseBody.size() == 10;
     }
 
 }
