@@ -16,8 +16,6 @@ import org.sonatype.goodies.testsupport.TestSupport;
 import org.sonatype.nexus.common.event.EventManager;
 import org.sonatype.nexus.common.wonderland.DownloadService.Download;
 import org.sonatype.nexus.plugins.report.internal.ReportService;
-import org.sonatype.nexus.plugins.report.internal.rest.ReportApiConstants;
-import org.sonatype.nexus.plugins.report.internal.rest.ReportResource;
 import org.sonatype.nexus.repository.Format;
 import org.sonatype.nexus.repository.Repository;
 import org.sonatype.nexus.repository.manager.RepositoryManager;
@@ -52,14 +50,14 @@ public class ReportResourceTest extends TestSupport {
     }
 
     @Test
-    public void should_return_Parameter_repositoryName_is_required() {
+    public void downloadExcelReport_should_return_Parameter_repositoryName_is_required() {
         Response response = reportResource.downloadExcelReport(null);
         assert response.getStatus() == 400;
         assert response.getEntity().toString() == ReportApiConstants.REPOSITORY_NAME_REQUIRED;
     }
 
     @Test
-    public void should_return_Repository_not_found() {
+    public void downloadExcelReport_should_return_Repository_not_found() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(null);
         Response response = reportResource.downloadExcelReport("test");
@@ -68,7 +66,7 @@ public class ReportResourceTest extends TestSupport {
     }
 
     @Test
-    public void should_return_You_don_t_have_access_to_this_repository() {
+    public void downloadExcelReport_should_return_You_don_t_have_access_to_this_repository() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
         when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(false);
@@ -78,7 +76,7 @@ public class ReportResourceTest extends TestSupport {
     }
 
     @Test
-    public void should_return_INTERNAL_SERVER_ERROR() {
+    public void downloadExcelReport_should_return_INTERNAL_SERVER_ERROR() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
         when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
@@ -93,7 +91,7 @@ public class ReportResourceTest extends TestSupport {
     }
 
     @Test
-    public void should_return_response_with_empty_file() {
+    public void downloadExcelReport_should_return_response_with_empty_file() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
         when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
@@ -109,6 +107,46 @@ public class ReportResourceTest extends TestSupport {
         assert response.getHeaders().containsKey(com.google.common.net.HttpHeaders.CONTENT_LENGTH);
         assert response.getHeaders().get(com.google.common.net.HttpHeaders.CONTENT_LENGTH).get(0).toString()
                 .equals("0");
+    }
+    
+    @Test
+    public void downloadJsonReport_should_return_Parameter_repositoryName_is_required() {
+        Response response = reportResource.downloadJsonReport(null);
+        assert response.getStatus() == 400;
+        assert response.getEntity().toString() == ReportApiConstants.REPOSITORY_NAME_REQUIRED;
+    }
+
+    @Test
+    public void downloadJsonReport_should_return_Repository_not_found() {
+        String repositoryName = "test";
+        when(repositoryManager.get(repositoryName)).thenReturn(null);
+        Response response = reportResource.downloadJsonReport("test");
+        assert response.getStatus() == 400;
+        assert response.getEntity().toString() == ReportApiConstants.REPOSITORY_NOT_FOUND;
+    }
+
+    @Test
+    public void downloadJsonReport_should_return_You_don_t_have_access_to_this_repository() {
+        String repositoryName = "test";
+        when(repositoryManager.get(repositoryName)).thenReturn(repository);
+        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(false);
+        Response response = reportResource.downloadJsonReport("test");
+        assert response.getStatus() == 403;
+        assert response.getEntity().toString() == ReportApiConstants.REPOSITORY_PERMISSION_DENIED;
+    }
+
+    @Test
+    public void downloadJsonReport_should_return_INTERNAL_SERVER_ERROR() {
+        String repositoryName = "test";
+        when(repositoryManager.get(repositoryName)).thenReturn(repository);
+        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
+        try {
+            when(reportService.getComponentsInfos(repository)).thenThrow(new RepositoryNotFoundException());
+        } catch (RepositoryNotFoundException e) {
+            Assert.fail();
+        }
+        Response response = reportResource.downloadJsonReport("test");
+        assert response.getStatus() == 500;
     }
 
 }

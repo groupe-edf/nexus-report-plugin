@@ -96,6 +96,10 @@ public class ReportResource extends ComponentSupport implements Resource, Report
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresPermissions(ReportApiConstants.REPORT_API_PERMISSION)
     public Response downloadJsonReport(@PathParam("repositoryName") final String repositoryName) {
+        if (null == repositoryName) {
+            return Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_HTML_TYPE)
+                    .entity(ReportApiConstants.REPOSITORY_NAME_REQUIRED).build();
+        }
         try {
             Repository repository = repositoryManager.get(repositoryName);
             if (null == repository) {
