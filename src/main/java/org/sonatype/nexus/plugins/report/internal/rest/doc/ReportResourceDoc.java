@@ -38,4 +38,9 @@ public interface ReportResourceDoc {
             @ApiResponse(code = 400, message = ReportApiConstants.REPOSITORY_NAME_REQUIRED) })
     Response downloadExcelReport(@ApiParam(ReportApiConstants.REPOSITORY_NAME_DESCRIPTION) final String repositoryName)
             throws IOException;
+    @ApiOperation(value = ReportApiConstants.DOWNLOAD_REPORT_API_OPERATION)
+    @ApiResponses(value = { @ApiResponse(code = 403, message = ReportApiConstants.REPORT_PERMISSION_DENIED),
+            @ApiResponse(code = 400, message = ReportApiConstants.REPOSITORY_NAME_REQUIRED) })
+    Response downloadJsonReport(@ApiParam(ReportApiConstants.REPOSITORY_NAME_DESCRIPTION) final String repositoryName)
+            throws IOException;
 }

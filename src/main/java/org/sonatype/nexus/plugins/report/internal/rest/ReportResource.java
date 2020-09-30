@@ -30,6 +30,7 @@ import com.codahale.metrics.annotation.Timed;
 
 /**
  * Represents the {@code /report} API
+ * 
  * @author Mathieu Delrocq
  *
  */
@@ -81,6 +82,33 @@ public class ReportResource extends ComponentSupport implements Resource, Report
                     .header(CONTENT_LENGTH, report.getLength()).build();
         } catch (Exception e) {
             log.error("Unable to download the report {}", fileName, e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.TEXT_HTML_TYPE)
+                    .entity(e.getMessage()).build();
+        }
+    }
+
+    @Timed
+    @ExceptionMetered
+    @Validate
+    @GET
+    @Path("json/{repositoryName}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequiresPermissions(ReportApiConstants.REPORT_API_PERMISSION)
+    public Response downloadJsonReport(@PathParam("repositoryName") final String repositoryName) {
+        try {
+            Repository repository = repositoryManager.get(repositoryName);
+            if (null == repository) {
+                return Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_HTML_TYPE)
+                        .entity(ReportApiConstants.REPOSITORY_NOT_FOUND).build();
+            }
+            if (!repositoryPermissionChecker.userCanBrowseRepository(repository)) {
+                return Response.status(Response.Status.FORBIDDEN).type(MediaType.TEXT_HTML_TYPE)
+                        .entity(ReportApiConstants.REPOSITORY_PERMISSION_DENIED).build();
+            }
+            return Response.ok(reportService.getComponentsInfos(repository)).build();
+        } catch (Exception e) {
+            log.error("Unable to download the report for the repository {}", repositoryName, e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).type(MediaType.TEXT_HTML_TYPE)
                     .entity(e.getMessage()).build();
         }
