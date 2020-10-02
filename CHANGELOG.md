@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Rename french octet to english byte ([PR #4](https://github.com/groupe-edf/nexus-report-plugin/pull/4))
+- Detach the plugin from nexus-public
 
 ## [v0.1.1] - 14/09/2020
 ### Fixed
