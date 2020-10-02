@@ -4,17 +4,13 @@ import './ReportRepositoryList.scss';
 import Axios from 'axios';
 import faChevronRight from '@fortawesome/free-solid-svg-icons';
 import {
-  ContentBody,
   NxFilterInput,
   NxFontAwesomeIcon,
   NxTable,
   NxTableBody,
   NxTableCell,
   NxTableHead,
-  NxTableRow,
-  Section,
-  Utils,
-  SectionActions
+  NxTableRow
 } from '@sonatype/react-shared-components';
 
 const INITIAL_VALUE = {};
@@ -42,7 +38,7 @@ export default function ReportRepositoryList() {
 
   function handleReport(repositoryName) {
     try {
-      window.open(Utils.urlFromPath('/service/rest/v1/report/' + repositoryName), '_blank');
+      window.open(NX.app.baseUrl + '/service/rest/v1/report/' + repositoryName, '_blank');
     } catch (error) {
       console(error);
     }
@@ -93,16 +89,17 @@ export default function ReportRepositoryList() {
     setRepositoryList(sortedList);
   }
 
-  return <ContentBody className='nxrm-repository-list'>
-    <Section>
-      <SectionActions>
+  return (
+  <div class="nxrm-content-body nxrm-report-repository-list">
+    <div class="nxrm-section nx-tile nxrm-report-repository-list">
+      <div class="nxrm-section-actions nx-tile__actions nxrm-report-repository-list">
         <NxFilterInput
           inputId="filter"
           value={filterText}
           onChange={filter}
           onClear={clearFilter}
           placeholder={UIStrings.REPOSITORY_LIST.filterPlaceHolder} />
-      </SectionActions>
+      </div>
       <NxTable>
         <NxTableHead>
           <NxTableRow>
@@ -125,6 +122,7 @@ export default function ReportRepositoryList() {
           ))}
         </NxTableBody>
       </NxTable>
-    </Section>
-  </ContentBody>;
+    </div>
+  </div>
+  );
 }

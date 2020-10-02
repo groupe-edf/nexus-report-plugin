@@ -15,7 +15,7 @@
     "@fortawesome/fontawesome-svg-core": "=1.2.19",
     "@fortawesome/free-solid-svg-icons": "=5.9.0",
     "@xstate/react": "=1.0.0-rc.3",
-    "@sonatype/react-shared-components": "=1.6.8",
+    "@sonatype/react-shared-components": "=0.43.1",
     "axios": "=0.19.0",
     "classnames": "=2.2.6",
     "react": "=16.11.0",
