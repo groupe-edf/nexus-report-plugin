@@ -8,10 +8,8 @@ window.plugins.push({
     {
       mode: 'browse',
       path: '/report',
-      text: UIStrings.REPORT_FORM.MENU.text,
-      description: UIStrings.REPORT_FORM.MENU.description,
+      ...UIStrings.REPORT_FORM.MENU,
       view: ReportRepositoryList,
-      authenticationRequired: false,
       iconCls: 'x-fa fa-file',
       visibility: {
         bundle: 'org.sonatype.nexus.plugins.nexus-report-plugin',
