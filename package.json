@@ -16,7 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "=5.9.0",
     "@xstate/react": "=1.0.0-rc.3",
     "@sonatype/react-shared-components": "=1.2.1",
-    "axios": "=0.19.0",
+    "axios": ">=0.21.1",
     "classnames": "=2.2.6",
     "react": "=16.11.0",
     "react-dom": "=16.11.0",
