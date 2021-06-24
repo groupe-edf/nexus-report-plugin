@@ -16,6 +16,8 @@
   <packaging>bundle</packaging>
   <version>0.2.1-SNAPSHOT</version>
 
+  <inceptionYear>2020</inceptionYear>
+
   <properties>
     <sonar.sources>src/main/java,src/main/resources/static/rapture</sonar.sources>
   </properties>
@@ -27,13 +29,28 @@
     </license>
   </licenses>
 
+  <organization>
+    <name>EDF</name>
+    <url>https://github.com/groupe-edf</url>
+  </organization>
   <developers>
     <developer>
       <id>mat1e</id>
+      <url>https://github.com/mat1e</url>
       <name>Mathieu Delrocq</name>
-      <email>delrocq.mathieu@gmail.com</email>
     </developer>
   </developers>
+  <contributors>
+    <contributor>
+      <name>Olivier Routier</name>
+      <url>https://github.com/Cloudehard</url>
+      <organization>EDF</organization>
+      <organizationUrl>https://github.com/groupe-edf</organizationUrl>
+      <roles>
+        <role>Product Owner</role>
+      </roles>
+    </contributor>
+  </contributors>
 
   <dependencies>
     <dependency>
@@ -113,7 +130,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
   <build>
     <pluginManagement>
       <plugins>
