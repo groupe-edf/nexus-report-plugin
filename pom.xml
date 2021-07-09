@@ -7,9 +7,10 @@
   <parent>
     <groupId>org.sonatype.nexus.plugins</groupId>
     <artifactId>nexus-plugins</artifactId>
-    <version>3.28.0-01</version>
+    <version>3.31.0-01</version>
   </parent>
 
+  <groupId>fr.edf.nexus.plugins</groupId>
   <artifactId>nexus-report-plugin</artifactId>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Allow the user to download a reports with statistics of his repository usages</description>
