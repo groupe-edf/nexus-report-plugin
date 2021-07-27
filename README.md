@@ -6,10 +6,19 @@
 
 Download a statistics report of your repositories.
 
-## Build
-You don't need to build the code to install the plugin, you can find the .kar file in the last release.
+## Compatibility Matrix
 
-If you want to build the plugin by yourself, you can check it out and run `mvn clean install -PbuildKar` in nexus-report-plugin.
+| Plugin version | Nexus repository version     |
+|----------------|------------------------------|
+| v0.2.0         | Up to 3.28                   |
+| v0.1.2         | Up to 3.24                   |
+| v0.1.1         | Up to 3.24                   |
+| v0.1.0         | Up to 3.24                   |
+
+## Build
+You don't need to build the code to install the plugin, pre-built bundle is available for each version in the assets of the [releases on Github](https://github.com/groupe-edf/nexus-report-plugin/releases).
+
+To build the plugin by yourself, clone the repository and run `mvn clean install -PbuildKar` in `nexus-report-plugin` directory. The bundle will be availbale in `nexus-report-plugin/target/` with name `nexus-report-plugin-<version>-bundle.kar`
 
 ## Installation
 Copy the .kar file in `deploy/` folder of your Nexus server and restart the server.
@@ -88,3 +97,16 @@ the right "nx-report-download" and an access to the repository are needed to get
 
 <img src="https://zupimages.net/up/20/40/8n3y.png" width="900"/>
 
+## Team
+
+Product Owner: [Cloudehard](https://github.com/Cloudehard)
+
+Developer: [mat1e](https://github.com/mat1e)
+
+## Getting help
+
+Looking to contribute to our code but need some help? There's a few ways to get information:
+
+- Check out the [Nexus3](http://stackoverflow.com/questions/tagged/nexus3) tag on Stack Overflow
+- Check out the [Nexus Repository User List](https://groups.google.com/a/glists.sonatype.com/forum/?hl=en#!forum/nexus-users)
+- [Open an issue on this repository](https://github.com/groupe-edf/nexus-report-plugin/issues)
