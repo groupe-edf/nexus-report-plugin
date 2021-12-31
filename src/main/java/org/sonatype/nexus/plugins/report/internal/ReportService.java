@@ -118,9 +118,9 @@ public class ReportService extends ComponentSupport {
             }
 
             // component lastUpdated = update dateTime of most recently updated asset
-            if (asset.lastUpdated() != null
-                    && (componentLastUpdated == null || componentLastUpdated.isBefore(asset.lastUpdated()))) {
-                componentLastUpdated = asset.lastUpdated();
+            if (asset.blobUpdated() != null
+                    && (componentLastUpdated == null || componentLastUpdated.isBefore(asset.blobUpdated()))) {
+                componentLastUpdated = asset.blobUpdated();
             }
 
             // component createdBy = createdBy field of the asset if it's not "system"
