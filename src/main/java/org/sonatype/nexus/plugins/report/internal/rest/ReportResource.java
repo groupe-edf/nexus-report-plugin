@@ -72,7 +72,7 @@ public class ReportResource extends ComponentSupport implements Resource, Report
                 return Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_HTML_TYPE)
                         .entity(ReportApiConstants.REPOSITORY_NOT_FOUND).build();
             }
-            if (!repositoryPermissionChecker.userCanBrowseRepository(repository)) {
+            if (!repositoryPermissionChecker.userCanReadOrBrowse(repository)) {
                 return Response.status(Response.Status.FORBIDDEN).type(MediaType.TEXT_HTML_TYPE)
                         .entity(ReportApiConstants.REPOSITORY_PERMISSION_DENIED).build();
             }
@@ -106,7 +106,7 @@ public class ReportResource extends ComponentSupport implements Resource, Report
                 return Response.status(Response.Status.BAD_REQUEST).type(MediaType.TEXT_HTML_TYPE)
                         .entity(ReportApiConstants.REPOSITORY_NOT_FOUND).build();
             }
-            if (!repositoryPermissionChecker.userCanBrowseRepository(repository)) {
+            if (!repositoryPermissionChecker.userCanReadOrBrowse(repository)) {
                 return Response.status(Response.Status.FORBIDDEN).type(MediaType.TEXT_HTML_TYPE)
                         .entity(ReportApiConstants.REPOSITORY_PERMISSION_DENIED).build();
             }

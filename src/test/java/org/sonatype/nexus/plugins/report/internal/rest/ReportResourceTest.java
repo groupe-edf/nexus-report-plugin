@@ -72,7 +72,7 @@ public class ReportResourceTest extends TestSupport {
     public void downloadExcelReport_should_return_You_don_t_have_access_to_this_repository() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
-        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(false);
+        when(repositoryPermissionChecker.userCanReadOrBrowse(repository)).thenReturn(false);
         Response response = reportResource.downloadExcelReport("test");
         assert response.getStatus() == 403;
         assert response.getEntity().toString() == ReportApiConstants.REPOSITORY_PERMISSION_DENIED;
@@ -82,7 +82,7 @@ public class ReportResourceTest extends TestSupport {
     public void downloadExcelReport_should_return_INTERNAL_SERVER_ERROR() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
-        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
+        when(repositoryPermissionChecker.userCanReadOrBrowse(repository)).thenReturn(true);
         try {
             when(reportService.downloadReport(repository, "excel")).thenThrow(new IOException("error"));
         } catch (IOException | RepositoryNotFoundException e) {
@@ -97,7 +97,7 @@ public class ReportResourceTest extends TestSupport {
     public void downloadExcelReport_should_return_response_with_empty_file() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
-        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
+        when(repositoryPermissionChecker.userCanReadOrBrowse(repository)).thenReturn(true);
         InputStream in = new ByteArrayInputStream("".getBytes());
         try {
             when(reportService.downloadReport(repository, "excel")).thenReturn(new Download(0, in));
@@ -132,7 +132,7 @@ public class ReportResourceTest extends TestSupport {
     public void downloadJsonReport_should_return_You_don_t_have_access_to_this_repository() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
-        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(false);
+        when(repositoryPermissionChecker.userCanReadOrBrowse(repository)).thenReturn(false);
         Response response = reportResource.downloadJsonReport("test");
         assert response.getStatus() == 403;
         assert response.getEntity().toString() == ReportApiConstants.REPOSITORY_PERMISSION_DENIED;
@@ -142,7 +142,7 @@ public class ReportResourceTest extends TestSupport {
     public void downloadJsonReport_should_return_INTERNAL_SERVER_ERROR() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
-        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
+        when(repositoryPermissionChecker.userCanReadOrBrowse(repository)).thenReturn(true);
         try {
             when(reportService.getComponentsInfos(repository)).thenThrow(new RepositoryNotFoundException());
         } catch (RepositoryNotFoundException e) {
@@ -156,7 +156,7 @@ public class ReportResourceTest extends TestSupport {
     public void downloadJsonReport_should_return_response_with_10_components() {
         String repositoryName = "test";
         when(repositoryManager.get(repositoryName)).thenReturn(repository);
-        when(repositoryPermissionChecker.userCanBrowseRepository(repository)).thenReturn(true);
+        when(repositoryPermissionChecker.userCanReadOrBrowse(repository)).thenReturn(true);
         try {
             when(reportService.getComponentsInfos(repository)).thenReturn(PojoBuilder.buildComponentInfosList());
         } catch (RepositoryNotFoundException e) {
