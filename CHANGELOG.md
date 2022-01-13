@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v0.2.1] - 13/01/2022
+### Added
+- Compatibility with NXRM 3.37
+
+### Changed
+- Upgrade Webpack to 4.44.2
+
+### Fixed
+- LastUpdated value
+
 ## [v0.2.0] - 13/10/2020
 ### Added
 - Compatibility with NXRM 3.28
