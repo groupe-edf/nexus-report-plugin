@@ -10,6 +10,7 @@ Download a statistics report of your repositories.
 
 | Plugin version | Nexus repository version     |
 |----------------|------------------------------|
+| v0.2.1         | Up to 3.37                   |
 | v0.2.0         | Up to 3.28                   |
 | v0.1.2         | Up to 3.24                   |
 | v0.1.1         | Up to 3.24                   |
