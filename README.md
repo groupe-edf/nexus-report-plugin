@@ -10,11 +10,11 @@ Download a statistics report of your repositories.
 
 | Plugin version | Nexus repository version     |
 |----------------|------------------------------|
-| v0.2.1         | Up to 3.37                   |
-| v0.2.0         | Up to 3.28                   |
-| v0.1.2         | Up to 3.24                   |
-| v0.1.1         | Up to 3.24                   |
-| v0.1.0         | Up to 3.24                   |
+| v0.2.1         | >=3.37                       |
+| v0.2.0         | >=3.28 and <3.37             |
+| v0.1.2         | >=3.24 and <3.28             |
+| v0.1.1         | >=3.24 and <3.28             |
+| v0.1.0         | >=3.24 and <3.28             |
 
 ## Build
 You don't need to build the code to install the plugin, pre-built bundle is available for each version in the assets of the [releases on Github](https://github.com/groupe-edf/nexus-report-plugin/releases).
