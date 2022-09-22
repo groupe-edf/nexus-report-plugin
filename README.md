@@ -1,4 +1,4 @@
-<img src="https://zupimages.net/up/20/37/uwy6.png" width="80"/>
+<img src="https://zupimages.net/up/22/38/odtp.png" width="80"/>
 
 # nexus-report-plugin
 [![Build Status](https://travis-ci.org/groupe-edf/nexus-report-plugin.svg?branch=master)](https://travis-ci.org/github/groupe-edf/nexus-report-plugin)
